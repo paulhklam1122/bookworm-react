@@ -4,35 +4,38 @@ import { Form, Button } from 'semantic-ui-react'
 
 import InlineError from '../messages/InlineError'
 
-const LoginForm = (props) => (
-  <Form onSubmit={props.onSubmit}>
-    <Form.Field error={!!props.errors.email}>
-      <label htmlFor='email'>Email</label>
-      <input
-        type='email'
-        id='email'
-        name='email'
-        placeholder='example@example.com'
-        value={props.email}
-        onChange={(e) => props.onChange(e)}
-      />
-      {props.errors.email && <InlineError text={props.errors.email} />}
-    </Form.Field>
-    <Form.Field error={!!props.errors.password}>
-      <label htmlFor='password'>Password</label>
-      <input
-        type='password'
-        id='password'
-        name='password'
-        placeholder='make it secure'
-        value={props.password}
-        onChange={(e) => props.onChange(e)}
-      />
-      {props.errors.password && <InlineError text={props.errors.password} />}
-    </Form.Field>
-    <Button primary>Login</Button>
-  </Form>
-)
+const LoginForm = (props) => {
+  const { email, errors, onChange, onSubmit, password } = props
+  return (
+    <Form onSubmit={onSubmit}>
+      <Form.Field error={!!errors.email}>
+        <label htmlFor='email'>Email</label>
+        <input
+          type='email'
+          id='email'
+          name='email'
+          placeholder='example@example.com'
+          value={email}
+          onChange={(e) => onChange(e)}
+        />
+        {errors.email && <InlineError text={errors.email} />}
+      </Form.Field>
+      <Form.Field error={!!errors.password}>
+        <label htmlFor='password'>Password</label>
+        <input
+          type='password'
+          id='password'
+          name='password'
+          placeholder='make it secure'
+          value={password}
+          onChange={(e) => onChange(e)}
+        />
+        {errors.password && <InlineError text={errors.password} />}
+      </Form.Field>
+      <Button primary>Login</Button>
+    </Form>
+  )
+}
 
 LoginForm.defaultProps = {
   email: '',
