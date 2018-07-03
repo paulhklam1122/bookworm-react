@@ -19,7 +19,7 @@ const LoginForm = (props) => (
       {props.errors.email && <InlineError text={props.errors.email} />}
     </Form.Field>
     <Form.Field error={!!props.errors.password}>
-      <label htmlFor='password'>Email</label>
+      <label htmlFor='password'>Password</label>
       <input
         type='password'
         id='password'
