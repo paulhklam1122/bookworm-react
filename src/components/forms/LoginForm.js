@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Button } from 'semantic-ui-react'
+import { Button, Form, Message } from 'semantic-ui-react'
 
 import InlineError from '../messages/InlineError'
 
@@ -8,6 +8,10 @@ const LoginForm = (props) => {
   const { email, errors, onChange, onSubmit, password } = props
   return (
     <Form onSubmit={onSubmit}>
+      { errors.global && <Message negative>
+        <Message.Header>Something went wrong</Message.Header>
+        <p>{errors.global}</p>
+      </Message>}
       <Form.Field error={!!errors.email}>
         <label htmlFor='email'>Email</label>
         <input

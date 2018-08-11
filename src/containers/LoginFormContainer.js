@@ -22,10 +22,12 @@ class LoginFormContainer extends Component {
   }
 
   handleSubmit = () => {
-    const errors = this.validate(this.state.data)
+    const { data } = this.state
+    const { submit } = this.props
+    const errors = this.validate(data)
     this.setState({ errors })
     if (isEmpty(errors)) {
-      this.props.submit(this.state.data)
+      submit(data).catch(err => this.setState({ errors: err.response.data.errors }))
     }
   }
 
@@ -37,11 +39,12 @@ class LoginFormContainer extends Component {
   }
 
   render () {
+    const { data, errors } = this.state
     return (
       <LoginForm
-        email={this.state.data.email}
-        password={this.state.data.password}
-        errors={this.state.errors}
+        email={data.email}
+        password={data.password}
+        errors={errors}
         onChange={this.handleInputChange}
         onSubmit={this.handleSubmit}
       />

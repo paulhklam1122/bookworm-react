@@ -4,26 +4,23 @@ import { connect } from 'react-redux'
 
 import { login } from '../actions/auth'
 
-import LoginPage from '../components/pages/LoginPage'
+import LoginFormContainer from './LoginFormContainer';
 
 class LoginPageContainer extends Component {
-  submit = (data) => {
-    const { dispatch, history } = this.props
-    dispatch(login(data)).then(() => history.push('/'))
-  }
+  submit = data =>
+    this.props.login(data).then(() => this.props.history.push('/'))
 
   render () {
     return (
-      <LoginPage submit={this.submit} />
+      <LoginFormContainer submit={this.submit} />
     )
   }
 }
 
 LoginPageContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired
 }
 
-export default connect()(LoginPageContainer)
+export default connect(null, { login })(LoginPageContainer)
